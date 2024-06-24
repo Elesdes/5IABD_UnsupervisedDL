@@ -1,0 +1,4 @@
+pre-commit==3.7.1
+tensorflow[and-cuda]==2.16.1
+Jinja2==3.1.4
+typeguard==4.3.0
