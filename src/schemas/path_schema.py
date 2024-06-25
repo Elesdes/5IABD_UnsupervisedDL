@@ -17,7 +17,7 @@ class PathSchema:
         for _, _, files in os.walk(self.algorithms):
             for file in files:
                 if file.endswith(".ipynb"):
-                    model_name = os.path.splitext(file)[0].title()
+                    model_name = os.path.splitext(file)[0]
                     model_path = os.path.join(self.models, model_name)
                     os.makedirs(model_path, exist_ok=True)
 
