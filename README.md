@@ -45,3 +45,9 @@ If you want to develop on this project, you must install pre-commit hooks. Else,
 ```bash
 pre-commit install
 ```
+
+### Setup File Tree
+
+```bash
+python src/setup.py
+```
