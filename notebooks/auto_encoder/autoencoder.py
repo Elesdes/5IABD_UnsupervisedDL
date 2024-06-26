@@ -11,7 +11,8 @@ class Autoencoder:
         encoder_layers,
         decoder_layers,
         loss="binary_crossentropy",
-        activation="relu"):
+        activation="relu",
+    ):
 
         self.input_dim = input_dim
         self.encoding_dim = encoding_dim
@@ -24,21 +25,21 @@ class Autoencoder:
         self._build_model()
 
     def _build_model(self):
-        self.encoder = Sequential(name='encoder')
+        self.encoder = Sequential(name="encoder")
         self.encoder.add(Input(shape=(self.input_dim,)))
         for units in self.encoder_layers:
             self.encoder.add(Dense(units, activation=self.activation))
         self.encoder.add(Dense(self.encoding_dim, activation=self.activation))
 
-        self.decoder = Sequential(name='decoder')
+        self.decoder = Sequential(name="decoder")
         self.decoder.add(Input(shape=(self.encoding_dim,)))
         for units in self.decoder_layers:
             self.decoder.add(Dense(units, activation=self.activation))
-        self.decoder.add(Dense(self.input_dim, activation='sigmoid'))
+        self.decoder.add(Dense(self.input_dim, activation="sigmoid"))
 
-        self.autoencoder = Sequential([self.encoder, self.decoder], name='autoencoder')
+        self.autoencoder = Sequential([self.encoder, self.decoder], name="autoencoder")
 
-        self.autoencoder.compile(optimizer='adam', loss=self.loss)
+        self.autoencoder.compile(optimizer="adam", loss=self.loss)
 
     def train(self, x_train, x_test, epochs=50, batch_size=256):
         self.epochs = epochs
