@@ -1,18 +1,21 @@
-from dataclasses import dataclass
 import os
 
 
-@dataclass
 class PathSchema:
-    root: str = os.path.abspath(".")
+    def __init__(self):
+        self.root: str = os.path.abspath(
+            os.path.join(os.getcwd(), os.pardir, os.pardir, os.pardir)
+        )
 
-    # Data
-    data: str = os.path.join(root, "data")
-    models: str = os.path.join(data, "models")
-    dataset: str = os.path.join(data, "dataset")
+        # Data
+        self.data: str = os.path.join(self.root, "data")
+        self.models: str = os.path.join(self.data, "models")
+        self.dataset: str = os.path.join(self.data, "dataset")
 
-    # Algorithms
-    algorithms: str = os.path.join(root, "notebooks")
+        # Algorithms
+        self.algorithms: str = os.path.join(self.root, "src", "algorithms")
+
+        self.__create_file_tree()
 
     def __create_file_tree(self):
         os.makedirs(self.data, exist_ok=True)
@@ -21,8 +24,7 @@ class PathSchema:
 
         for _, dirs, _ in os.walk(self.algorithms):
             for dir in dirs:
-                model_path = os.path.join(self.models, dir)
-                os.makedirs(model_path, exist_ok=True)
-
-    def __post_init__(self):
-        self.__create_file_tree()
+                if "__" not in dir:
+                    model_path = os.path.join(self.models, dir)
+                    print(model_path)
+                    os.makedirs(model_path, exist_ok=True)
