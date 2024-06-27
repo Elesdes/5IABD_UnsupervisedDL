@@ -46,8 +46,4 @@ If you want to develop on this project, you must install pre-commit hooks. Else,
 pre-commit install
 ```
 
-### Setup File Tree
-
-```bash
-python src/setup.py
-```
+## You can now use the notebooks present either in the `notebooks` or `src` directory.
