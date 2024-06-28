@@ -17,7 +17,7 @@ def limited_os_walk(data_dir, max_folders):
 
 def load_custom_dataset(
     data_dir: str = path_config.dataset,
-    img_size: Tuple[int, int] | None = (256, 256),
+    img_size: Tuple[int, int] = (256, 256),
     num_classes: int = 5,
 ) -> Tuple[Tuple[np.array, np.array], Tuple[None, None]]:
     image_list = []

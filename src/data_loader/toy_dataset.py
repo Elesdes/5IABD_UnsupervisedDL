@@ -6,8 +6,8 @@ from sklearn.datasets import make_blobs
 def load_toy_data(
     n_samples: int = 100,
     n_features: int = 2,
-    n_clusters: int | None = None,
-    random_state: int | None = None,
+    n_clusters: int = None,
+    random_state: int = None,
 ) -> Tuple[np.ndarray, np.ndarray]:
     return make_blobs(
         n_samples=n_samples,
