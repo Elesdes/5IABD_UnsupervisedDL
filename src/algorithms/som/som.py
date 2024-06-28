@@ -72,3 +72,22 @@ class SOM:
     def generate(self, n_samples):
         indices = np.random.randint(0, self.x * self.y, n_samples)
         return self.weights.reshape(self.x * self.y, self.input_dim)[indices]
+
+    def compute_umatrix(self):
+        umatrix = np.zeros((self.x, self.y))
+        for i in range(self.x):
+            for j in range(self.y):
+                distances = []
+                for di in [-1, 0, 1]:
+                    for dj in [-1, 0, 1]:
+                        if di == 0 and dj == 0:
+                            continue
+                        ni, nj = i + di, j + dj
+                        if 0 <= ni < self.x and 0 <= nj < self.y:
+                            dist = np.linalg.norm(self.weights[i, j] - self.weights[ni, nj])
+                            distances.append(dist)
+                umatrix[i, j] = np.mean(distances)
+        return umatrix
+
+    def project_data(self, data):
+        return np.array([self._find_bmu(sample) for sample in data])
